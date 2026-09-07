@@ -1,7 +1,7 @@
 {
-  "name": "tex-matematica-discreta",
+  "name": "tex-teoria-de-linguagens",
   "version": "1.0.0",
-  "description": "Projeto LaTeX para Matemática Discreta",
+  "description": "Projeto LaTeX para Teoria de Linguagens",
   "scripts": {
     "compile": "npm run clean && node scripts/compile.js",
     "clean": "node scripts/clean.js",
