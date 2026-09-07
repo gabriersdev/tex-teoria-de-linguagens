@@ -1,0 +1,50 @@
+\begin{lstlisting}[language=Python]
+import random
+
+# Exemplo: Diagnostico de uma Doenca Rara
+# P(D) = Probabilidade a priori de ter a doença
+# P(T|D) = Sensibilidade (teste positivo dado que tem a doença)
+# P(T|S) = Falso positivo (teste positivo dado que está saudável)
+
+prevalencia = 0.01      # P(Doenca) = 1%
+sensibilidade = 0.95    # P(Positivo|Doenca) = 95%
+falso_positivo = 0.05   # P(Positivo|Saudavel) = 5%
+
+# --- Calculo Analitico pelo Teorema de Bayes ---
+prob_saudavel = 1.0 - prevalencia
+prob_evidencia = (sensibilidade * prevalencia) + (falso_positivo * prob_saudavel)
+prob_posterior_teorica = (sensibilidade * prevalencia) / prob_evidencia
+
+print("--- Calculo Analitico ---")
+print(f"P(Doenca|Positivo) Teorica: {prob_posterior_teorica:.4f} ({prob_posterior_teorica:.2%})")
+
+# --- Simulacao Empirica (Geracao Randomica) ---
+populacao_tamanho = 100000
+verdadeiros_positivos = 0
+falsos_positivos = 0
+
+for _ in range(populacao_tamanho):
+    # Determina se o individuo tem a doenca com base na prevalencia
+    tem_doenca = random.random() < prevalencia
+    
+    if tem_doenca:
+        # Se tem a doenca, verifica se o teste da positivo (sensibilidade)
+        if random.random() < sensibilidade:
+            verdadeiros_positivos += 1
+    else:
+        # Se nao tem a doenca, verifica se ocorre falso positivo
+        if random.random() < falso_positivo:
+            falsos_positivos += 1
+
+total_positivos = verdadeiros_positivos + falsos_positivos
+prob_posterior_empirica = verdadeiros_positivos / total_positivos if total_positivos > 0 else 0
+
+print("\n--- Resultados da Simulacao Empirica ---")
+print(f"Populacao Total Simulada: {populacao_tamanho}")
+print(f"Total de Testes Positivos Obtidos: {total_positivos}")
+print(f" - Verdadeiros Positivos (Doentes reais): {verdadeiros_positivos}")
+print(f" - Falsos Positivos (Saudaveis com teste pos.): {falsos_positivos}")
+print(f"P(Doenca|Positivo) Empirica: {prob_posterior_empirica:.4f} ({prob_posterior_empirica:.2%})")
+print(f"Diferenca Absoluta: {abs(prob_posterior_teorica - prob_posterior_empirica):.6f}")
+\end{lstlisting}
+

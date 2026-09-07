@@ -1,0 +1,12 @@
+{
+  "name": "tex-matematica-discreta",
+  "version": "1.0.0",
+  "description": "Projeto LaTeX para Matemática Discreta",
+  "scripts": {
+    "compile": "npm run clean && node scripts/compile.js",
+    "clean": "node scripts/clean.js",
+    "build": "npm run clean && npm run compile"
+  },
+  "author": "",
+  "license": "ISC"
+}

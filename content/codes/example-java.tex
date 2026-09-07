@@ -1,0 +1,57 @@
+\begin{lstlisting}[language=Java]
+
+import java.util.Random;
+
+public class Probabilidade {
+    public static void main(String[] args) {
+        double media = 0, variancia = 0, soma_desvio = 0;
+        int quant_experimentos = 10;
+        double eventos_total = 100;
+        Random gerador = new Random();
+
+        // cria um vetor para guardar a probabilidade de cada experimento
+        double[] probabilidade = new double[quant_experimentos];
+
+        for (int i = 0; i < quant_experimentos; i++) {
+            // realiza o experimento i
+            int eventos_sucesso = 0;
+            for (int j = 0; j < eventos_total; j++) {
+                // gerar 3 valores aleatórios de 0 ou 1
+                // 0 = cara, 1 = coroa
+                int r1 = gerador.nextInt(2);
+                int r2 = gerador.nextInt(2);
+                int r3 = gerador.nextInt(2);
+
+                // verifica se as 3 moedas deram cara
+                if (r1 == 0 && r2 == 0 && r3 == 0) {
+                    eventos_sucesso++;
+                }
+            }
+            // calcula a probabilidade experimental e guarda esse valor
+            probabilidade[i] = eventos_sucesso / eventos_total;
+            // soma para fazer a média
+            media += probabilidade[i];
+        }
+
+        // calcula a média
+        media = media / quant_experimentos;
+
+        // calcula a variância
+        for (int i = 0; i < quant_experimentos; i++) {
+            double desvio = probabilidade[i] - media;
+            desvio = desvio * desvio;
+            soma_desvio += desvio;
+        }
+
+        // calcula a variância usando os desvios
+        variancia = soma_desvio / quant_experimentos;
+
+        // indica as métricas
+        System.out.println("Métricas:");
+        System.out.println("Para " + quant_experimentos + " experimentos, com " + eventos_total + " eventos cada");
+        System.out.println("Média: " + media);
+        System.out.println("Variância: " + variancia);
+    }
+}
+
+\end{lstlisting}

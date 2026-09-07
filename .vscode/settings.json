@@ -1,0 +1,8 @@
+{
+  "latex-workshop.formatting.latex": "latexindent",
+  "[latex]": {
+    "editor.defaultFormatter": "James-Yu.latex-workshop",
+    "editor.formatOnSave": false
+  },
+  "latex-workshop.latex.autoBuild.run": "never"
+}
