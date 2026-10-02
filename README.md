@@ -23,15 +23,21 @@ tex-teoria-de-linguagens/
 
 Certifique-se de ter os seguintes programas instalados no seu computador para usar todas as funções:
 1. **Node.js e NPM**: Utilizados para rodar os scripts de automação.
-2. **Distribuição LaTeX**: Recomendamos o **MiKTeX** (para Windows) ou **TeX Live** (Linux/Mac).
-3. **latexmk**: O script principal de compilação exige o pacote `latexmk`. Ele automatiza as passagens de referências e bibliografias (`bibtex`).
+2. **Perl**: Necessário para a execução do compilador `latexmk`. No Windows, instale o [Strawberry Perl](https://strawberryperl.com/).
+3. **Distribuição LaTeX**: Recomendamos o **MiKTeX** (para Windows) ou **TeX Live** (Linux/Mac).
+4. **latexmk**: O script principal de compilação exige o pacote `latexmk`. Ele automatiza as passagens de referências e bibliografias (`bibtex`).
 
 ### Como instalar o compilador LaTeX (Windows / MiKTeX)
 1. Baixe o instalador do [MiKTeX](https://miktex.org/download) e instale-o.
 2. Abra o "MiKTeX Console", vá na aba **Updates** e clique em "Check for updates".
-3. Para garantir que você tem o `latexmk` (responsável pela automação) disponível, abra um terminal e rode:
+3. Para garantir que você tem o `latexmk` (responsável pela automação) disponível, abra um terminal e rode os comandos abaixo.
+   
+   *(Nota 1: O primeiro comando garante que o MiKTeX saiba de onde baixar os pacotes, evitando o erro "Not a package repository".)*
+   *(Nota 2: O último comando atualiza a base e evita o erro "you have not checked for MiKTeX updates" na primeira compilação do latexmk.)*
    ```bash
-   mpm --install=latexmk
+   mpm --set-repository=$(mpm --pick-repository-url)
+   miktex packages install latexmk
+   miktex packages update
    ```
 *(Se estiver usando Linux/Ubuntu, basta rodar `sudo apt install texlive-full latexmk`)*
 
